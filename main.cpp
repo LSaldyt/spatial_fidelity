@@ -5,6 +5,7 @@
 #include "io.hpp"
 #include "lattice.hpp"
 #include "agent.hpp"
+#include "update.hpp"
 
 using std::vector;
 using std::string;
@@ -19,5 +20,9 @@ int main(int argc, char* argv[])
 
     auto lattice = Lattice<Agent>();
     lattice.add(1, 1, Agent(0, 0, 0));
+    while(true)
+    {
+        update(lattice);
+    }
 }
 

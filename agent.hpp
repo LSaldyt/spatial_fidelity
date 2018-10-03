@@ -10,4 +10,11 @@ struct Agent
         walk_style  = set_walk_style;
         information = set_information;
     }
+
+    Agent()
+    {
+        task = 0;
+        walk_style = false;
+        information = false;
+    }
 };

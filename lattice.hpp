@@ -1,3 +1,4 @@
+#pragma once
 #include <unordered_map>
 #include <tuple>
 #include "io.hpp"
@@ -20,7 +21,8 @@ struct Lattice
         auto lookup = map.find(index);
         if (lookup == map.end())
         {
-            //map[lookup] = t;
+            map[index] = t;
+            print("Added successfully");
         }
         else
         {
