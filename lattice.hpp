@@ -17,14 +17,14 @@ struct Lattice
     void add(int x, int y, T t)
     {
         auto index = make_tuple(x, y);
-        //auto lookup = map.find(index);
-        //if (lookup == map.end())
-        //{
-        //    //map[lookup] = t;
-        //}
-        //else
-        //{
-        //    print("Element not inserted, already present: ", x, y, t);
-        //}
+        auto lookup = map.find(index);
+        if (lookup == map.end())
+        {
+            //map[lookup] = t;
+        }
+        else
+        {
+            print("Insertion failed");
+        }
     }
 };

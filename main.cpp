@@ -18,6 +18,6 @@ int main(int argc, char* argv[])
     }
 
     auto lattice = Lattice<Agent>();
-    lattice.add(1, 1, Agent());
+    lattice.add(1, 1, Agent(0, 0, 0));
 }
 
