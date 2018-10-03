@@ -6,6 +6,7 @@
 #include "lattice.hpp"
 #include "agent.hpp"
 #include "update.hpp"
+#include "field.hpp"
 
 using std::vector;
 using std::string;

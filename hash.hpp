@@ -1,3 +1,4 @@
+#pragma once
 #include <tuple>
 namespace hash_tuple{
 

@@ -8,12 +8,16 @@ using std::tuple;
 using std::make_tuple;
 using std::unordered_map;
 
-using LocationKey = tuple<int, int>;
+using Point = tuple<int, int>;
+using HashPoint = hash_tuple::hash<Point>;
+
+template <typename T>
+using PointMap = unordered_map<Point, T, HashPoint>;
 
 template <typename T>
 struct Lattice
 {
-    unordered_map<LocationKey, T, hash_tuple::hash<LocationKey>> map;
+    PointMap<T> map;
 
     void add(int x, int y, T t)
     {
