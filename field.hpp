@@ -52,7 +52,17 @@ struct Field
         bool y_valid = (y >= y_min) and (y <= y_max);
         if (x_valid and y_valid)
         {
-
+            lattice.add(x, y, t);
         }
+    }
+
+    void update()
+    {
+        int i = 0;
+        for (auto& kv : lattice.map)
+        {
+            i++;
+        }
+        print(i);
     }
 };

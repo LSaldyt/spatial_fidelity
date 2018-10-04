@@ -5,7 +5,6 @@
 #include "io.hpp"
 #include "lattice.hpp"
 #include "agent.hpp"
-#include "update.hpp"
 #include "field.hpp"
 
 using std::vector;
@@ -19,11 +18,11 @@ int main(int argc, char* argv[])
         args.push_back(argv[i]);
     }
 
-    auto lattice = Lattice<Agent>();
-    lattice.add(1, 1, Agent(0, 0, 0));
+    auto field = Field<Agent>(0, 100, 0, 100);
+    field.add(1, 1, Agent(0, 0, 0));
     while(true)
     {
-        update(lattice);
+        field.update();
     }
 }
 
