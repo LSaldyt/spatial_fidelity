@@ -1,9 +1,13 @@
 #include "lattice.hpp"
 #include "hash.hpp"
+#include "choice.hpp"
+#include <vector>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include <algorithm>
 
+using std::vector;
 using std::string;
 using std::unordered_map;
 using std::unordered_set;
@@ -56,11 +60,36 @@ struct Field
         }
     }
 
+    vector<Point> adjacent(int x, int y)
+    {
+        vector<Point> points;
+        points.push_back(make_tuple(x, y + 1));
+        points.push_back(make_tuple(x, y - 1));
+        points.push_back(make_tuple(x + 1, y));
+        points.push_back(make_tuple(x - 1, y));
+        return points;
+    }
+
     void update()
     {
         int i = 0;
-        for (auto& kv : lattice.map)
+        for (auto& kv : lattice.map) // O(n)
         {
+            Point location = kv.first;
+            T& agent       = kv.second;
+            int x = std::get<0>(location);
+            int y = std::get<1>(location);
+            auto points = adjacent(x, y);
+
+            std::remove_if(points.begin(), points.end(), [this](auto &p){return this->lattice.map.find(p) != this->lattice.map.end();});
+            if (points.begin() == points.end())
+            {
+                continue;
+            }
+            Point next = *choice(points.begin(), points.end());
+            int px = std::get<0>(next);
+            int py = std::get<1>(next);
+            print("HERE");
             i++;
         }
         print(i);
