@@ -20,10 +20,9 @@ int main(int argc, char* argv[])
 
     auto field = Field<Agent>(0, 100, 0, 100);
     field.add(1, 1, Agent(0, 0, 0));
-    field.add(1, 2, Agent(0, 0, 0));
-    field.update();
-    //while(true)
-    //{
-    //}
+    while(true)
+    {
+        field.update();
+    }
 }
 

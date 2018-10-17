@@ -50,16 +50,6 @@ struct Field
         }
     }
 
-    void add(int x, int y, T t)
-    {
-        bool x_valid = (x >= x_min) and (x <= x_max);
-        bool y_valid = (y >= y_min) and (y <= y_max);
-        if (x_valid and y_valid)
-        {
-            lattice.add(x, y, t);
-        }
-    }
-
     vector<Point> adjacent(int x, int y)
     {
         vector<Point> points;
@@ -70,9 +60,32 @@ struct Field
         return points;
     }
 
+    bool valid(int x, int y)
+    {
+        bool x_valid = (x >= x_min) and (x <= x_max);
+        bool y_valid = (y >= y_min) and (y <= y_max);
+        return x_valid and y_valid;
+    }
+
+
+    void add(int x, int y, T t)
+    {
+        if (valid(x, y))
+        {
+            lattice.add(x, y, t);
+        }
+    }
+
+    void remove(int x, int y)
+    {
+        if (valid(x, y))
+        {
+            lattice.remove(x, y);
+        }
+    }
+
     void update()
     {
-        int i = 0;
         for (auto& kv : lattice.map) // O(n)
         {
             Point location = kv.first;
@@ -81,17 +94,22 @@ struct Field
             int y = std::get<1>(location);
             auto points = adjacent(x, y);
 
-            std::remove_if(points.begin(), points.end(), [this](auto &p){return this->lattice.map.find(p) != this->lattice.map.end();});
-            if (points.begin() == points.end())
+            points.erase(std::remove_if(points.begin(), points.end(), 
+                        [this](auto &p){return (not this->valid(std::get<0>(p), std::get<1>(p))) or 
+                                                   (this->lattice.map.find(p) != this->lattice.map.end());}));
+            if (not points.empty())
             {
-                continue;
+                Point next = *choice(points.begin(), points.end());
+                int px = std::get<0>(next);
+                int py = std::get<1>(next);
+                if (not valid(px, py))
+                {
+                    print("Invalid step taken:");
+                    print(px, py);
+                }
+                add(px, py, agent);
+                remove(x, y);
             }
-            Point next = *choice(points.begin(), points.end());
-            int px = std::get<0>(next);
-            int py = std::get<1>(next);
-            print("HERE");
-            i++;
         }
-        print(i);
     }
 };

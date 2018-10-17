@@ -33,4 +33,14 @@ struct Lattice
             print("Insertion failed");
         }
     }
+
+    void remove(int x, int y)
+    {
+        auto index = make_tuple(x, y);
+        auto lookup = map.find(index);
+        if (lookup != map.end())
+        {
+            map.erase(index);
+        }
+    }
 };
