@@ -102,11 +102,6 @@ struct Field
                 Point next = *choice(points.begin(), points.end());
                 int px = std::get<0>(next);
                 int py = std::get<1>(next);
-                if (not valid(px, py))
-                {
-                    print("Invalid step taken:");
-                    print(px, py);
-                }
                 add(px, py, agent);
                 remove(x, y);
             }

@@ -26,7 +26,7 @@ struct Lattice
         if (lookup == map.end())
         {
             map[index] = t;
-            print("Added successfully");
+            //print("Added successfully");
         }
         else
         {
